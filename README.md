@@ -24,3 +24,8 @@
 
         > pip3 install labelImg
      
+    * Creacion de directorio donde guardaremos nuestras imagenes y datos.
+
+        1. Creamos una carpeta llamada ***data***(el nombre puede cambiar).
+        2. Dentro de la carpeta ***data*** creamos dos carpetas mas las cuales tendras el nombre de ***images*** y ***labels***(estos nombres no pueden ser otros).
+    * Dentro del directorio de  nuesta carpeta ***images*** colocaremos nuestra images del objeto.
