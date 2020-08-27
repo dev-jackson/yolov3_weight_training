@@ -34,3 +34,7 @@
     * ### **LabelIgm**
 
         ![Texto alternativo](/src/img/labelImg.jpg "Título alternativo")
+    * Para ejecutar labelImg solo ecjecutamos el siguiente comando en el terminal:
+        > labelImg
+    
+    
