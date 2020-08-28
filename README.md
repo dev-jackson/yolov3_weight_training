@@ -53,7 +53,17 @@
         * Una vez que hayamos echo ese cambio vamos a elegir nuestra carpeta que contenta las imagenes que hemos conseguido. Damos click en ***Open Dir***
         y buscamos nuestra carpeta deseada en esta caso ***images*** y le damos en ***Selecionar carpeta***.
         ![Texto alternarnativo](/src/img/GitLoad2.gif "Titulo alternativo")
+        * Con el directorio ya selecionado lo que veremos es nuestra primera imagen que se encuentra en la caarpeta y lo que sigue es crear nuestro Box delimitador indicando donde esta el objeto el cuando queremos hacer el entrenamiento.
+            1. Damos click en ***Create\nReactBox***
+            2. con el mouse arastramos donde esta el objeto requerido.
+            3. Una vez echo el box saldra u ventana donde ingresaremos el nombre del ***lable*** en este cado ***joystick***.
+            ![Texto alternarnativo](/src/img/GitLoad3.gif  "Titulo alternativo")
+        * En el caso de que tengasmo mas de uno del mismo obejto en la misma images tambien lo delimitamos y le damos el mismo nombre de label. Una vez puesto el label al primer obejtos saldra en una lista para elejir.
+        ![Texto alternarnativo](/src/img/usoLabelImg1.png "Titulo alternativo")
+        * Depues de hacer esto hacemos clik en el boton guardar y guardamos el achivo ***.txt*** en la misma carpeta de las imagenes ***images*** 
+        *  Despues de guardar el ***txt*** con el mismo nombre de la la imgen donde se hizo el proceso, damos clink en ***Next Image***
         
+
 
 
 
