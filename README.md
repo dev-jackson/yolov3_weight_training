@@ -62,7 +62,8 @@
         ![Texto alternarnativo](/src/img/usoLabelImg1.png "Titulo alternativo")
         * Depues de hacer esto hacemos clik en el boton guardar y guardamos el achivo ***.txt*** en la misma carpeta de las imagenes ***images*** 
         *  Despues de guardar el ***txt*** con el mismo nombre de la la imgen donde se hizo el proceso, damos clink en ***Next Image***
-        
+        ![Texto alternarnativo](/src/img/GitLoad4.gif  "Titulo alternativo")
+        * **Este proceso lo repetiremos con todas la imagenes dentro de la carpeta, es tedioso pero esta es la manera para entrenar un objeto customizado**
 
 
 
