@@ -64,6 +64,19 @@
         *  Despues de guardar el ***txt*** con el mismo nombre de la la imgen donde se hizo el proceso, damos clink en ***Next Image***
         ![Texto alternarnativo](/src/img/GitLoad4.gif  "Titulo alternativo")
         * **Este proceso lo repetiremos con todas la imagenes dentro de la carpeta, es tedioso pero esta es la manera para entrenar un objeto customizado**
+        * Despues de ese proceso deberia quedar su caperta de images de las siguiente manera:
+        ![Texto alternarnativo](/src/img/dirImages2.png  "Titulo alternativo")
+* ## **Obtencion de un modelo entreand(Darknet)**
+    * Para obtener este modelo pre-entrenado para la usar en nuetro proyecto hacemos un ***git clone*** y entramos en el directorio descargado:
+        ~~~ cmd  
+        git clone https://github.com/AlexeyAB/darknet.git
+        cd darknet
+        ~~~
+    * Si tiene una máquina basada en ***NVIDIA GPU*** e instaló CUDA, haga ***GPU = 1*** en el Makefile. También puede compilarlo con OpenCV haciendo ***OPENCV = 1*** en el Makefile, pero asegúrese de tener OpenCV instalado (OpenCV para C / C ++ no para Python).
+    * **Después de realizar cambios, simplemente ejecute make, esto creará el ejecutable darknet.**
+    
+
+
 
 
 
