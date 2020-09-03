@@ -68,12 +68,25 @@
         ![Texto alternarnativo](/src/img/dirImages2.png  "Titulo alternativo")
 * ## **Obtencion de un modelo entreand(Darknet)**
     * Para obtener este modelo pre-entrenado para la usar en nuetro proyecto hacemos un ***git clone*** y entramos en el directorio descargado:
-        ~~~ cmd  
+        ``` PowerShell
         git clone https://github.com/AlexeyAB/darknet.git
         cd darknet
-        ~~~
+        ```
     * Si tiene una máquina basada en ***NVIDIA GPU*** e instaló CUDA, haga ***GPU = 1*** en el Makefile. También puede compilarlo con OpenCV haciendo ***OPENCV = 1*** en el Makefile, pero asegúrese de tener OpenCV instalado (OpenCV para C / C ++ no para Python).
     * **Después de realizar cambios, simplemente ejecute make, esto creará el ejecutable darknet.**
+    * ### Ejucion de make(Linux)
+        * Solo hazlo en el directorio darknet, antes de hacer, puede configurar tales opciones en el `Makefile`:
+            ```PowerShell
+                PS Code\>git clone https://github.com/microsoft/vcpkg
+                PS Code\>cd vcpkg
+                PS Code\vcpkg>$env:VCPKG_ROOT=$PWD
+                PS Code\vcpkg>.\bootstrap-vcpkg.bat
+                PS Code\vcpkg>.\vcpkg install darknet[full]:x64-windows #remplazar con darknet [opencv-base, cuda, cudnn]: x64-windows para una instalación más rápida de las dependencias
+                PS Code\vcpkg>cd ..
+                PS Code\>git clone https://github.com/AlexeyAB/darknet
+                PS Code\>cd darknet
+                PS Code\darknet>.\build.ps1
+            ````
     
 
 
