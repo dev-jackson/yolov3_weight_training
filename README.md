@@ -74,8 +74,13 @@
         ```
     * Si tiene una máquina basada en ***NVIDIA GPU*** e instaló CUDA, haga ***GPU = 1*** en el Makefile. También puede compilarlo con OpenCV haciendo ***OPENCV = 1*** en el Makefile, pero asegúrese de tener OpenCV instalado (OpenCV para C / C ++ no para Python).
     * **Después de realizar cambios, simplemente ejecute make, esto creará el ejecutable darknet.**
-    * ### Ejucion de make(Linux)
-        * Solo hazlo en el directorio darknet, antes de hacer, puede configurar tales opciones en el `Makefile`:
+    * ### Ejecucion de make(Linux)
+        * Para ejecutar Darknet en Linux, use los ejemplos de este artículo, simplemente use ./darknet en lugar de darknet.exe, es decir, use este comando: `./darknet detector test ./cfg/coco.data ./cfg/yolov4.cfg ./yolov4.weigths` (esto depende de cual sea nuestro entrenamiento)
+    * ### Ejecucion en windows(usando CMake)
+        * Este es el enfoque recomendado para construir Darknet en Windows.
+            1. Instale Visual Studio 2017 o 2019. En caso de que necesite descargarlo
+            2. Instale CUDA (al menos v10.0) habilitando la integración VS durante la instalación.
+            3. Abra Powershell (Inicio -> Todos los programas -> Windows Powershell) y escriba estos comandos:
             ```PowerShell
                 PS Code\>git clone https://github.com/microsoft/vcpkg
                 PS Code\>cd vcpkg
@@ -86,7 +91,22 @@
                 PS Code\>git clone https://github.com/AlexeyAB/darknet
                 PS Code\>cd darknet
                 PS Code\darknet>.\build.ps1
-            ````
+            ```
+        * El uso en windows seria de la siguiente manera: `darknet.exe detector train cfg/coco.data cfg/yolov4.cfg yolov4.conv.137`
+    * ## Descargamos pesas(weigths) ya pre-entrenadas
+        * Descargue el archivo de peso dentro de la carpeta de `data` usando el comando que se proporciona a continuación
+          ```bash
+            wget https://pjreddie.com/media/files/darknet53.conv.74
+          ```
+    * ## Configuracion de dataset personalizado
+        * Ya que estas pesas pre-entrendas se na usado para diversas acciones debemos hacer algunos combios para nuestros propositos.
+        * Crearemos un achivo yolo-(`el nombre de obejto abreviado o simplemente obj`).cfg y este archivo deve estar en la carpeta `darknet/cfg`.
+        * Luego una vez ahi copiamos en contenido del archivo `yolov3.cfg` que esta en la misma carpeta.
+        * Una vez echo esto realizaremos cambios dentro de nuestro achivo yolo.
+            * ### Clases
+                Dentro de nuestro archivo debemos cambiar el numero de clases, buscamos la secciones que tengan `[yolo]` y en las mismas cambiamos el numero de clases en este caso 1 por que solo estoy haciendo esto con una tipo de objeto.
+                
+        
     
 
 
