@@ -106,6 +106,111 @@
             * ### Clases
                 Dentro de nuestro archivo debemos cambiar el numero de clases, buscamos la secciones que tengan `[yolo]` y en las mismas cambiamos el numero de clases en este caso 1 por que solo estoy haciendo esto con una tipo de objeto.
                 
+            * ### Batch(Lote)
+                Este es el número de imágenes elegidas para cada batch(lote). Debe elegir esto de acuerdo con el tamaño de la memoria del sistema (GPU), pero lo ideal es mantenerlo en 64.
+                ```bash
+                batch=64
+                ```
+            * ### Subdivisions(Subdivisiones)
+                El lote se vuelve a dividir en los bloques de imágenes, consérvelo 16.
+                ```bash
+                subdivisions=16
+                ```
+            * ### Alto y ancho(Width and Height)
+                Por defecto, ancho = 608 y alto = 608, puede mantenerlo como está, pero si desea cambiarlo, asegúrese de que el número sea un múltiplo de 32(`si no es multiplo obtendra varios errores y lo mas posible el entrenamiento no se pueda concluir`).
+            * ### Maximo de lotes(Max batches)
+                Este el numero maximo de lotes que desea para el entrenamiento el cual tiene una formula
+                Esto no puede ser menos de 4000 incluso si usa 1 clase. Si está usando 2 clases, entonces debería ser 4000 y para 3 clases debería ser 6000. Utilice el resultado de la ecuación en el archivo cfg, que sería número.
+                
+                La ecuacion o formula seria:
+                ```bash
+                max_batches = (numero de clases) * 2000
+                ```
+                Pero como decia anteriormente este numero resultante no debe ser menor a 1 asi usemos una clase en nuestro caso seria:
+                ```bash
+                max_batches = (1) * 4000
+                ```
+                **Aviso: lo que se pone es el reultado no la formula, la formula solo es para sacar le valor que deve ir** 
+            * ### Pasos(Steps)
+                Los seps(pasos) deben ser le `80%` y `90%` del max_batches en nuestro caso seria:
+                ```bash
+                steps=3200,3600
+                ```
+            * ### Filtros(Filters)
+                Comprobamos si ahi `filters=255` encontrará 3 resultados en la sección `[convolucional]` justo antes de la sección `[yolo]`. Cámbielo con el resultado del siguiente cálculo:
+                ```bash
+                filters = (clases + 5) x 5
+                ``` 
+                Como nostros tenesmos solo una clase que es `joystick` el filtro debe ser `filters=18` y si son dos serian `filters=21`
+
+                **Aviso: lo que se pone es el reultado no la formula, la formula solo es para sacar le valor que deve ir**
+        * ## Entremamiento de datos personalizado
+            Ahora ya tenemos casi todo lo nesesario para hacer el entrenamiento, lo siguiente seria crear archivos para respaldar nuestro entrenamiento
+            
+            * ### Divicion de test y entreamiento 
+                Nesesitamos la lista de direcciones de las imagenes para el entrenamiento.
+
+                Creamos dos archivos dentro de `data`, `train.txt` y `test.txt` dentro de esos archivos deben tener la direccion de las imagenes, es muy importanta que las direcciones sean realtivas a al carpeta `darknet` el ejecutable. Si esto no funciona usar un ruta completa de cada uno de los archivos.
+
+                Esta seria el formato completo en linux:
+                ```bash
+                /home/user/Documents/yolov3_weight_training/data/images/hqdefault.jpg    
+                /home/user/Documents/yolov3_weight_training/data/images/images22.jpg
+                /home/user/Documents/yolov3_weight_training/data/images/image20.jpeg
+                /home/user/Documents/yolov3_weight_training/data/images/image6.jpeg
+                ```
+                Forma realiva:
+                ```bash
+                ../data/images/hqdefault.jpg
+                ../data/images/images22.jpg
+                ../data/images/image20.jpeg
+                ../data/images/image6.jpeg
+                ```
+                Cualquiera de las dos funcionaria esto podia cambiar dependiendo del sistema que estes realizado este proceso.
+                
+                Ponga el 80% del total de imágenes en train.txt y el 20% restante en test.txt, pero asegúrese de que no haya ninguna imagen común en estos archivos.
+
+                Si el archivo de imagen dado tiene su archivo de texto de anotación en la carpeta de etiquetas, entonces solo debe estar en train.txt o text.txt, de lo contrario, dará un error durante el entrenamiento.
+
+            * ### Creacion archivo .names
+                Necesitamos crear un archivo que tendrá el nombre de todas las clases (como `classes.txt`), así que simplemente cree el archivo `obj.names` dentro de la carpeta de datos. La estructura del archivo debe ser la que se indica a continuación.
+
+                En este caso solo una clase o nombre:
+                ```txt
+                joystick
+                ```
+            * ### Creacion archivo .data
+                Este archivo contiene las rutas de otros archivos e información sobre el número de clases. Cree obj.data dentro de la carpeta de `data` y guarde el contenido que se indica a continuación.
+                ```txt
+                classes= 2
+                train  = ../data/train.txt
+                valid  = ../data/test.txt
+                names  = ../data/obj.names
+                backup = backup/
+                ```
+                
+                La primera línea es solo el número de clases de objetos.
+
+                La segunda, tercera y cuarta líneas contienen las rutas de los otros archivos, pero nuevamente estas rutas deben ser relativas al ejecutable de darknet.
+
+                La copia de seguridad es la ruta donde se almacenarán los pesos durante el entrenamiento, puede encontrarla dentro del repositorio de darknet. Después de cada 100 iteraciones, se almacenarán los pesos.
+            * ### Empecemos el entrenamiento
+                Si tienes alguna pc con `GPU` en hora buena sino el servicio de `Google Colap`  para hacer este tipo de actividades.
+                Procedemos a ejecutar este comando dentro de la carpeta `darknet`:
+                ```bash
+                ./darknet detector train ../data/obj.data cfg/yolo-joystick.cfg ../data/darknet53.conv.74
+                ```
+                El entrenamiento llevará mucho tiempo, así que tómate un trago y descansa.
+
+                Este entrenamiento sigue guardando los pesos después de cada 100 iteraciones en la carpeta de respaldo, por lo que después de cada 100 iteraciones, puede detenerlo y reiniciarlo desde el mismo punto.
+
+                Entonces, suponga que detuvo el entrenamiento después de 500 iteraciones, luego, para reiniciar desde este punto, simplemente ejecute el siguiente comando.
+                ```bash
+                ./darknet detector train ../data/joystick.data cfg/yolo-joystick.cfg backup/yolo-joystick_500.weights
+                ```
+            * ### Testing
+                
+
         
     
 
